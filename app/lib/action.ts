@@ -61,8 +61,10 @@ export async function createInvoice(prevState: State, formData: FormData) {
         INSERT INTO invoices (customer_id, amount, status, date)
         VALUES (${customerId}, ${amountInCents}, ${status}, ${date})`;
     } catch (error) {
+      console.error(error); // Use the error variable to log or handle it.
       return {
-        message: 'Database Error: Failed to Create Invoice.',
+        message: 'Database Error: Failed to Create Invoice.'
+
       };
     }
   
@@ -109,6 +111,7 @@ export async function updateInvoice(
     `;
   } catch (error) {
     return { message: 'Database Error: Failed to Update Invoice.' };
+    console.error(error); // Use the error variable to log or handle it.
   }
   // Revalidate the cache for the invoices page and redirect the user.
   revalidatePath('/dashboard/invoices');
@@ -122,6 +125,7 @@ export async function deleteInvoice(id: string) {
     revalidatePath('/dashboard/invoices');
   } catch (error) {
     return { message: 'Database Error: Failed to Delete Invoice.' };
+    console.error(error); // Use the error variable to log or handle it.
   }
 }
 
